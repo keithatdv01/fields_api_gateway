@@ -19,3 +19,26 @@ def ldf_fields_version_tags(version: str, tags: str):
             raise ValueError(f"Unknown tags: {tags}")
         else:
             return fields_for_tags
+
+def dlc_tags_data():
+    return {
+        "0":
+            {
+                "ds_all": ["all"],
+                "ds_all_tag1": ["all", "tag1"],
+                "ds_all_tag2": ["all", "tag2"],
+                "ds_all_tag1_tag2": ["all", "tag1", "tag2"]
+            }}
+
+def ldf_fields_version_dataset(version: str, dataset_id: str):
+    dlc_fields = dlc_tags_data()
+    versioned_tags = dlc_fields.get(version)
+    if versioned_tags is None:
+        raise ValueError(f"Unknown LDF version: {version}")
+    else:
+        print(f"Tags for LDF v{version} are {versioned_tags}")
+        fields_for_tags = versioned_tags.get(dataset_id)
+        if fields_for_tags is None:
+            raise ValueError(f"Unknown tags: {dataset_id}")
+        else:
+            return fields_for_tags
