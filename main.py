@@ -1,4 +1,6 @@
+import uvicorn
 from fastapi import FastAPI
+
 from src.ldf_fields import ldf_fields_data, ldf_fields_version_tags, ldf_fields_version_dataset
 
 app = FastAPI()
@@ -38,3 +40,6 @@ def get_ldf_fields_version_tags(version: str, tags: str):
 def get_ldf_fields_version_dataset(version: str, dataset_id: str):
     print("got tags: ", dataset_id)
     return ldf_fields_version_dataset(version, dataset_id)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
